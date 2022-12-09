@@ -4,6 +4,10 @@ on:
   workflow_dispatch:
     inputs:
     
+      DEVICE_NAME:
+        description: 'Device Name'
+        required: true
+        default: 'PD2060F'
       ENV_APP:
         description: 'Environment compress (apt-get)'
         required: true
@@ -13,9 +17,9 @@ on:
         required: true
         default: 'mediafire-dl http://www.mediafire.com/file/ymztakm11lfhssi/Vivo_Y12S_PD2060F_EX_A_1.72.20_LA.UM.9.6.2.r1-02100-89xx-sdm439_Split_QPST.zip'
       UNPACK:
-        description: 'File Name (UNZIP)'
+        description: 'Extrac Command'
         required: true
-        default: 'unzip -j -o Vivo_Y12S_PD2060F_EX_A_1.72.20_LA.UM.9.6.2.r1-02100-89xx-sdm439_Split_QPST.zip -d firmware'
+        default: 'unzip -j -o Vivo_Y12S_PD2060F_EX_A_1.72.20_LA.UM.9.6.2.r1-02100-89xx-sdm439_Split_QPST.zip'
       IMG_SELECT:
         description: 'Image Selected (ex. recovery.img)'
         required: true
@@ -34,6 +38,7 @@ jobs:
 
     - name: Prepare the environment
       run: |
+        sudo rm -rf *
         sudo apt-get update >> log.txt
         sudo apt-get install ${{ github.event.inputs.ENV_APP }} -y
         sudo -H pip install wheel
@@ -47,21 +52,20 @@ jobs:
       run: |
         ${{ github.event.inputs.DOWNLOAD }} 
         
-    - name: UNPACK
+    - name: Extracting
       run: |
         ${{ github.event.inputs.UNPACK }} 
-    - name: CHECK DIR
-      run: |
         ls -a
 
     - name: Upload to Release
       uses: softprops/action-gh-release@v1
       with:
-        files: firmware/${{ github.event.inputs.IMG_SELECT }}
+        files: ${{ github.event.inputs.IMG_SELECT }}
         name: ${{ github.event.inputs.DEVICE_NAME }}
         tag_name: ${{ github.run_id }}
         body: |
-          url: ${{ github.event.inputs.URL_DOWNLOAD }}
-          image: ${{ github.event.inputs.IMG_SELECT }}
+          Download Url: ${{ github.event.inputs.URL_DOWNLOAD }}
+          Extract Command: ${{ github.event.inputs.UNPACK }}
+          Image Selected: ${{ github.event.IMG_SELECT }}
       env:
         GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB }}
