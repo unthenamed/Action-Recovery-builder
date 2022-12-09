@@ -15,7 +15,7 @@ on:
       UNPACK:
         description: 'File Name (UNZIP)'
         required: true
-        default: 'unzip -j Vivo_Y12S_PD2060F_EX_A_1.72.20_LA.UM.9.6.2.r1-02100-89xx-sdm439_Split_QPST.zip -d firmware'
+        default: 'unzip -j -o Vivo_Y12S_PD2060F_EX_A_1.72.20_LA.UM.9.6.2.r1-02100-89xx-sdm439_Split_QPST.zip -d firmware'
       IMG_SELECT:
         description: 'Image Selected (ex. recovery.img)'
         required: true
