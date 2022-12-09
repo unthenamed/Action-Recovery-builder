@@ -5,17 +5,17 @@ on:
     inputs:
     
       ENV_APP:
-        description: 'Env compres (apt-get)'
+        description: 'Environment compress (apt-get)'
         required: true
         default: 'fastjar p7zip-full'
       DOWNLOAD:
-        description: 'Firmware_URL (wget)'
+        description: 'Firmware_URL (gdown, mediafire-dl, wget)'
         required: true
-        default: 'wget https://download2392.mediafire.com/o9o3z09ojb1g/ymztakm11lfhssi/Vivo_Y12S_PD2060F_EX_A_1.72.20_LA.UM.9.6.2.r1-02100-89xx-sdm439_Split_QPST.zip'
+        default: 'mediafire-dl http://www.mediafire.com/file/ymztakm11lfhssi/Vivo_Y12S_PD2060F_EX_A_1.72.20_LA.UM.9.6.2.r1-02100-89xx-sdm439_Split_QPST.zip'
       UNPACK:
         description: 'File Name (UNZIP)'
         required: true
-        default: 'unzip -F Vivo_Y12S_PD2060F_EX_A_1.72.20_LA.UM.9.6.2.r1-02100-89xx-sdm439_Split_QPST.zip'
+        default: 'unzip -j Vivo_Y12S_PD2060F_EX_A_1.72.20_LA.UM.9.6.2.r1-02100-89xx-sdm439_Split_QPST.zip'
       IMG_SELECT:
         description: 'Image Selected (ex. recovery.img)'
         required: true
@@ -34,7 +34,11 @@ jobs:
 
     - name: Prepare the environment
       run: |
+        sudo apt-get update >> log.txt
         sudo apt-get install ${{ github.event.inputs.ENV_APP }} -y
+        sudo pip install gdown
+        sudo pip3 install git+https://github.com/Juvenal-Yescas/mediafire-dl
+
 
     - name: Downloading
       run: |
