@@ -1,6 +1,12 @@
 name: Main
-
-on: push
+on:
+  workflow_dispatch:
+    inputs:
+    
+      DEVICE_NAME:
+        description: 'Device Name'
+        required: true
+        default: 'PD2060F'
 
 jobs:
   build:
