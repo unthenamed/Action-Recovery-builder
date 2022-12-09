@@ -3,14 +3,19 @@ name: Bootable Finder
 on:
   workflow_dispatch:
     inputs:
-      URL_DOWNLOAD:
+    
+      ENV_APP:
+        description: 'Env compres (apt-get)'
+        required: true
+        default: 'fastjar p7zip-full'
+      DOWNLOAD:
         description: 'Firmware_URL (wget)'
         required: true
-        default: 'https://download2392.mediafire.com/o9o3z09ojb1g/ymztakm11lfhssi/Vivo_Y12S_PD2060F_EX_A_1.72.20_LA.UM.9.6.2.r1-02100-89xx-sdm439_Split_QPST.zip'
-      NAME_FILE:
+        default: 'wget https://download2392.mediafire.com/o9o3z09ojb1g/ymztakm11lfhssi/Vivo_Y12S_PD2060F_EX_A_1.72.20_LA.UM.9.6.2.r1-02100-89xx-sdm439_Split_QPST.zip'
+      UNPACK:
         description: 'File Name (UNZIP)'
         required: true
-        default: 'Vivo_Y12S_PD2060F_EX_A_1.72.20_LA.UM.9.6.2.r1-02100-89xx-sdm439_Split_QPST.zip'
+        default: 'unzip -F Vivo_Y12S_PD2060F_EX_A_1.72.20_LA.UM.9.6.2.r1-02100-89xx-sdm439_Split_QPST.zip'
       IMG_SELECT:
         description: 'Image Selected (ex. recovery.img)'
         required: true
@@ -27,19 +32,17 @@ jobs:
     - name: Check Out
       uses: actions/checkout@v3
 
-    - name: CHECK DIR
-      run: |
-        ls -a
-
     - name: Prepare the environment
       run: |
-        sudo apt-get install fastjar p7zip-full -y
+        sudo apt-get install ${{ github.event.inputs.ENV_APP }} -y
 
-    - name: downloading
+    - name: Downloading
       run: |
-        wget ${{ github.event.inputs.URL_DOWNLOAD }} 
-        7z x  ${{ github.event.inputs.NAME_FILE }}
-
+        {{ github.event.inputs.DOWNLOAD }} 
+        
+    - name: UNPACK
+      run: |
+        {{ github.event.inputs.UNPACK }} 
     - name: CHECK DIR
       run: |
         ls -a
