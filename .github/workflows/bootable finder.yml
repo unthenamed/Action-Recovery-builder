@@ -6,11 +6,15 @@ on:
       URL_DOWNLOAD:
         description: 'Firmware_URL (wget)'
         required: true
-        default: 'https://github.com/minimal-manifest-twrp/platform_manifest_twrp_omni'
-      IMG_SELECT:
-        description: 'Image Selected (ex. boot.img)'
+        default: 'https://download2392.mediafire.com/o9o3z09ojb1g/ymztakm11lfhssi/Vivo_Y12S_PD2060F_EX_A_1.72.20_LA.UM.9.6.2.r1-02100-89xx-sdm439_Split_QPST.zip'
+      TYPE_FILE:
+        description: 'File format (ex. .zip)'
         required: true
-        default: 'boot.img'
+        default: '.zip'
+      IMG_SELECT:
+        description: 'Image Selected (ex. recovery.img)'
+        required: true
+        default: 'recovery.img'
 
 jobs:
   build:
@@ -26,8 +30,8 @@ jobs:
     - name: Prepare the environment
       run: |
         sudo apt update 
-        git clone https://github.com/minimal-manifest-twrp/platform_manifest_twrp_omni
-        
+        wget ${{ github.event.inputs.URL_DOWNLOAD }} --output-file=file${{ github.event.inputs.TYPE_FILE }} 
+        unzip file${{ github.event.inputs.TYPE_FILE }} -j
     - name: CHECK DIR
       run: |
         ls -a
