@@ -28,6 +28,10 @@ jobs:
         sudo apt update -q
         sudo apt -y upgrade -q
         git clone https://github.com/minimal-manifest-twrp/platform_manifest_twrp_omni
+        
+    - name: CHECK DIR
+      run: |
+        la
 
     - name: Upload to Release
       uses: softprops/action-gh-release@v1
