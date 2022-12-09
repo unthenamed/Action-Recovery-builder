@@ -15,7 +15,7 @@ on:
       UNPACK:
         description: 'File Name (UNZIP)'
         required: true
-        default: 'unzip -j Vivo_Y12S_PD2060F_EX_A_1.72.20_LA.UM.9.6.2.r1-02100-89xx-sdm439_Split_QPST.zip'
+        default: 'unzip -j Vivo_Y12S_PD2060F_EX_A_1.72.20_LA.UM.9.6.2.r1-02100-89xx-sdm439_Split_QPST.zip -d firmware'
       IMG_SELECT:
         description: 'Image Selected (ex. recovery.img)'
         required: true
@@ -36,6 +36,7 @@ jobs:
       run: |
         sudo apt-get update >> log.txt
         sudo apt-get install ${{ github.event.inputs.ENV_APP }} -y
+        sudo -H pip install wheel
         sudo apt-get install python-setuptools
         sudo -H pip install  gdown
         sudo apt-get install python3-setuptools
@@ -56,7 +57,7 @@ jobs:
     - name: Upload to Release
       uses: softprops/action-gh-release@v1
       with:
-        files: ${{ github.event.inputs.IMG_SELECT }}
+        files: firmware/${{ github.event.inputs.IMG_SELECT }}
         name: ${{ github.event.inputs.DEVICE_NAME }}
         tag_name: ${{ github.run_id }}
         body: |
