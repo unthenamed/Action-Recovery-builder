@@ -7,10 +7,10 @@ on:
         description: 'Firmware_URL (wget)'
         required: true
         default: 'https://download2392.mediafire.com/o9o3z09ojb1g/ymztakm11lfhssi/Vivo_Y12S_PD2060F_EX_A_1.72.20_LA.UM.9.6.2.r1-02100-89xx-sdm439_Split_QPST.zip'
-      TYPE_FILE:
-        description: 'File format (ex. .zip)'
+      NAME_FILE:
+        description: 'File Name (UNZIP)'
         required: true
-        default: '.zip'
+        default: 'Vivo_Y12S_PD2060F_EX_A_1.72.20_LA.UM.9.6.2.r1-02100-89xx-sdm439_Split_QPST.zip'
       IMG_SELECT:
         description: 'Image Selected (ex. recovery.img)'
         required: true
@@ -33,8 +33,8 @@ jobs:
 
     - name: Prepare the environment
       run: |
-        wget ${{ github.event.inputs.URL_DOWNLOAD }} --output-file=file${{ github.event.inputs.TYPE_FILE }} 
-        #unzip file${{ github.event.inputs.TYPE_FILE }} -j
+        wget ${{ github.event.inputs.URL_DOWNLOAD }} 
+        unzip ${{ github.event.inputs.NAME_FILE }}
 
     - name: CHECK DIR
       run: |
@@ -43,7 +43,7 @@ jobs:
     - name: Upload to Release
       uses: softprops/action-gh-release@v1
       with:
-        files: 
+        files: ${{ github.event.inputs.IMG_SELECT }}
         name: ${{ github.event.inputs.DEVICE_NAME }}
         tag_name: ${{ github.run_id }}
         body: |
