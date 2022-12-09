@@ -38,11 +38,11 @@ jobs:
 
     - name: Downloading
       run: |
-        bash {{ github.event.inputs.DOWNLOAD }} 
+        ${{ github.event.inputs.DOWNLOAD }} 
         
     - name: UNPACK
       run: |
-        bash {{ github.event.inputs.UNPACK }} 
+        ${{ github.event.inputs.UNPACK }} 
     - name: CHECK DIR
       run: |
         ls -a
