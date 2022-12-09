@@ -4,9 +4,13 @@ on:
     inputs:
     
       DEVICE_NAME:
-        description: 'Device Name'
+        description: 'Device model'
         required: true
         default: 'PD2060F'
+      DOWNLOAD:
+        description: 'URL'
+        required: true
+        default: 'https://github.com/unthenamed/Action-Recovery-builder/releases/download/recovery.img/recovery.img'
 
 jobs:
   build:
@@ -14,14 +18,24 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+        
+        
       - name: Generate Changelog
-        run: echo "# Good things have arrived" > ${{ github.workspace }}-CHANGELOG.txt
+        run: |
+          sudo rm -rf *
+          sudo apt install cpio
+          sudo -H pip3 install twrpdtgen
+          wget ${{ github.event.inputs.DOWNLOAD }}
+          python3 -m twrpdtgen recovery.img
+          zip -r twrp.zip *
+          
+        
+        
         
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
           tag_name: ${{ github.run_id }}
-          files: |
-            *
+          files: twrp.zip
         env:
           GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB }}
