@@ -29,9 +29,9 @@ jobs:
 
     - name: Prepare the environment
       run: |
-        sudo apt update 
         wget ${{ github.event.inputs.URL_DOWNLOAD }} --output-file=file${{ github.event.inputs.TYPE_FILE }} 
         unzip file${{ github.event.inputs.TYPE_FILE }} -j
+
     - name: CHECK DIR
       run: |
         ls -a
