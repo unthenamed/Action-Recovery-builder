@@ -30,7 +30,7 @@ jobs:
         
     - name: CHECK DIR
       run: |
-        la
+        ls -a
 
     - name: Upload to Release
       uses: softprops/action-gh-release@v1
