@@ -36,8 +36,8 @@ jobs:
       run: |
         sudo apt-get update >> log.txt
         sudo apt-get install ${{ github.event.inputs.ENV_APP }} -y
-        sudo pip install gdown
-        sudo pip3 install git+https://github.com/Juvenal-Yescas/mediafire-dl
+        sudo -H pip install setuptools gdown
+        sudo -H pip3 install git+https://github.com/Juvenal-Yescas/mediafire-dl
 
 
     - name: Downloading
