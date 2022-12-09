@@ -33,8 +33,9 @@ jobs:
 
     - name: Prepare the environment
       run: |
+        sudo apt-get install fastjar
         wget ${{ github.event.inputs.URL_DOWNLOAD }} 
-        unzip ${{ github.event.inputs.NAME_FILE }}
+        jar xvf ${{ github.event.inputs.NAME_FILE }}
 
     - name: CHECK DIR
       run: |
