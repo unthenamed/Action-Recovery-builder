@@ -33,8 +33,7 @@ jobs:
 
     - name: Prepare the environment
       run: |
-        sudo apt-get install fastjar
-        apt install p7zip-full
+        sudo apt-get install fastjar p7zip-full -y
 
     - name: downloading
       run: |
