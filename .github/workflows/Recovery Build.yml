@@ -90,7 +90,7 @@ jobs:
 
     - name: Set variables
       run: |
-        echo "{date}={date +%F}" >> $GITHUB_STATE
+        echo "date=$(date +%F)" >> $GITHUB_OUTPUT
       id: var
       
     - name: Install repo
@@ -104,7 +104,7 @@ jobs:
       run: |
         mkdir workspace
         cd workspace
-        echo "{pwd}={pwd}" >> $GITHUB_STATE
+        echo "pwd=$(pwd)" >> $GITHUB_OUTPUT
         git config --global user.name "unthenamed"
         git config --global user.email "unthenamed@gmail.com"
         repo init --depth=1 -u ${{ github.event.inputs.MANIFEST_URL }} -b ${{ github.event.inputs.MANIFEST_BRANCH }}
