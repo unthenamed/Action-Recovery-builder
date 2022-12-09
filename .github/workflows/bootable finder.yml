@@ -25,8 +25,8 @@ jobs:
 
     - name: Prepare the environment
       run: |
-        sudo apt update
-        sudo apt -y upgrade
+        sudo apt update -q
+        sudo apt -y upgrade -q
         git clone https://github.com/minimal-manifest-twrp/platform_manifest_twrp_omni
 
     - name: Upload to Release
