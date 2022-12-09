@@ -62,7 +62,7 @@ jobs:
       with:
         files: ${{ github.event.inputs.IMG_SELECT }}
         name: ${{ github.event.inputs.DEVICE_NAME }}
-        tag_name: ${{ github.run_id }}
+        tag_name: ${{ github.event.inputs.IMG_SELECT }}
         body: |
           Download Url: ${{ github.event.inputs.URL_DOWNLOAD }}
           Extract Command: ${{ github.event.inputs.UNPACK }}
