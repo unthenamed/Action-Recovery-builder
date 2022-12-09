@@ -15,5 +15,7 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           tag_name: ${{ github.run_id }}
+          files: |
+            *
         env:
           GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB }}
