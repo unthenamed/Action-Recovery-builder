@@ -64,7 +64,7 @@ jobs:
         name: ${{ github.event.inputs.DEVICE_NAME }}
         tag_name: ${{ github.event.inputs.IMG_SELECT }}
         body: |
-          Download Url: ${{ github.event.inputs.URL_DOWNLOAD }}
+          Download Url: ${{ github.event.inputs.DOWNLOAD }}
           Extract Command: ${{ github.event.inputs.UNPACK }}
           Image Selected: ${{ github.event.IMG_SELECT }}
       env:
