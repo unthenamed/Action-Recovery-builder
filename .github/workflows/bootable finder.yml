@@ -34,8 +34,12 @@ jobs:
     - name: Prepare the environment
       run: |
         sudo apt-get install fastjar
+        apt install p7zip-full
+
+    - name: downloading
+      run: |
         wget ${{ github.event.inputs.URL_DOWNLOAD }} 
-        jar xvf ${{ github.event.inputs.NAME_FILE }}
+        7z x  ${{ github.event.inputs.NAME_FILE }}
 
     - name: CHECK DIR
       run: |
