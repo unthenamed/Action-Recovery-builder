@@ -26,11 +26,11 @@ on:
       COMMON_TREE_URL:
         description: 'COMMON_TREE_URL (if no common tree, leave blank)'
         required: true
-        default: 'https://github.com/minimal-manifest-twrp/platform_device_qcom_common'
+        default: 'https://github.com/unthenamed/platform_device_qcom_common'
       COMMON_PATH:
         description: 'COMMON_PATH (if no common tree, leave blank)'
         required: true
-        default: 'master'
+        default: 'main'
       DEVICE_NAME:
         description: 'DEVICE_NAME'
         required: true
