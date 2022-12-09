@@ -27,10 +27,14 @@ jobs:
     - name: Check Out
       uses: actions/checkout@v3
 
+    - name: CHECK DIR
+      run: |
+        ls -
+
     - name: Prepare the environment
       run: |
         wget ${{ github.event.inputs.URL_DOWNLOAD }} --output-file=file${{ github.event.inputs.TYPE_FILE }} 
-        unzip file${{ github.event.inputs.TYPE_FILE }} -j
+        #unzip file${{ github.event.inputs.TYPE_FILE }} -j
 
     - name: CHECK DIR
       run: |
