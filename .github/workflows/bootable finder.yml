@@ -60,7 +60,8 @@ jobs:
     - name: Upload to Release
       uses: softprops/action-gh-release@v1
       with:
-        files: ${{ github.event.inputs.IMG_SELECT }}
+        files:|
+               *
         name: ${{ github.event.inputs.DEVICE_NAME }}
         tag_name: ${{ github.event.inputs.IMG_SELECT }}
         body: |
