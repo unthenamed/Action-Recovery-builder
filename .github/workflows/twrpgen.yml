@@ -35,6 +35,7 @@ jobs:
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
+          name: ${{ github.event.inputs.DEVICE_NAME }}-${{ github.run_id }}
           tag_name: ${{ github.run_id }}
           files: ${{ github.event.inputs.DEVICE_NAME }}.zip
         env:
