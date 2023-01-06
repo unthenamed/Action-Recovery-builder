@@ -1,4 +1,4 @@
-name: Bootable Finder
+name: Image Finder
 
 on:
   workflow_dispatch:
