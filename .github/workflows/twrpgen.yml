@@ -27,7 +27,7 @@ jobs:
           sudo -H pip3 install twrpdtgen
           wget ${{ github.event.inputs.DOWNLOAD }}
           python3 -m twrpdtgen recovery.img
-          zip -r twrp.zip *
+          zip -r ${{ github.event.inputs.DEVICE_NAME }}.zip *
           
         
         
